@@ -6,6 +6,9 @@ class Solution {
             int absNum = Math.abs(num);
             int absClosest = Math.abs(closest);
 
+            // Immediate return if we find zero (best possible answer)
+            if (num == 0) return 0;
+
             if (absNum < absClosest || (absNum == absClosest && num > closest)) {
                 closest = num;
             }
