@@ -4,6 +4,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Array
 |  |
 | ------- |
+| [2277-count-equal-and-divisible-pairs-in-an-array](https://github.com/MariusReik/LeetCode/tree/master/2277-count-equal-and-divisible-pairs-in-an-array) |
 | [2626-count-the-number-of-good-subarrays](https://github.com/MariusReik/LeetCode/tree/master/2626-count-the-number-of-good-subarrays) |
 ## Hash Table
 |  |
