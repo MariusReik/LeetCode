@@ -1,38 +1,30 @@
 class Solution {
     public int countLargestGroup(int n) {
-        // Use a map to store the count of numbers with each digit sum
-        Map<Integer, Integer> digitSumCount = new HashMap<>();
-        
-        // Calculate digit sum for each number from 1 to n
-        for (int i = 1; i <= n; i++) {
-            int digitSum = getDigitSum(i);
-            digitSumCount.put(digitSum, digitSumCount.getOrDefault(digitSum, 0) + 1);
-        }
-        
-        // Find the maximum group size
+        // Since n is at most 10^4, the maximum digit sum is 9+9+9+9 = 36
+        int[] counts = new int[37]; // Use array instead of HashMap for better performance
+        int maxCount = 0;
         int maxSize = 0;
-        for (int count : digitSumCount.values()) {
-            maxSize = Math.max(maxSize, count);
-        }
         
-        // Count how many groups have the maximum size
-        int result = 0;
-        for (int count : digitSumCount.values()) {
-            if (count == maxSize) {
-                result++;
+        for (int i = 1; i <= n; i++) {
+            // Calculate digit sum directly
+            int num = i;
+            int sum = 0;
+            while (num > 0) {
+                sum += num % 10;
+                num /= 10;
+            }
+            
+            counts[sum]++;
+            
+            // Update maximum size and count in one pass
+            if (counts[sum] > maxSize) {
+                maxSize = counts[sum];
+                maxCount = 1;
+            } else if (counts[sum] == maxSize) {
+                maxCount++;
             }
         }
         
-        return result;
-    }
-    
-    // Helper method to calculate the sum of digits in a number
-    private int getDigitSum(int num) {
-        int sum = 0;
-        while (num > 0) {
-            sum += num % 10;
-            num /= 10;
-        }
-        return sum;
+        return maxCount;
     }
 }
