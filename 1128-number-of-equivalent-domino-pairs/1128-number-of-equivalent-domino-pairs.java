@@ -5,8 +5,12 @@ class Solution {
         for(int[] domino : dominoes){ 
             int a = domino[0], b = domino[1]; 
 
-            int key = a < b ? a * 10 + b : b * 10 + a;
-
+            int key;
+            if (a < b) {
+                key = a * 10 + b;  // If a < b, key = "ab" (e.g., [1,2] → 12)
+            } else {
+                key = b * 10 + a;  // Else, key = "ba" (e.g., [2,1] → 12)
+            }
             result += count[key]; 
             count[key]++;
         }
