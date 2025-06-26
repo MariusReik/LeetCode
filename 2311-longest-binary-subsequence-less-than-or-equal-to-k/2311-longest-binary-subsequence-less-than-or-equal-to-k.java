@@ -1,10 +1,8 @@
 public class Solution {
     public int longestSubsequence(String s, int k) {
         int n = s.length();
-        int zeros = 0;
-        int ones = 0;
-        long value = 0;
-        long pow = 1;
+        int zeros = 0, ones = 0;
+        long value = 0, pow = 1;
 
         // Count all zeros
         for (char c : s.toCharArray()) {
