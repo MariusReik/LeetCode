@@ -1,25 +1,21 @@
-public class Solution {
-    public boolean isValid(String s) {
-        
-        int n = s.length();
-        if (n < 3) {
-            return false;
-        }
+class Solution {
+    public boolean isValid(String word) {
+        if (word.length() < 3) return false;
 
-        int vowels = 0;
-        int consonants = 0;
+        int v = 0, c = 0;
+        long vb = (1L << 'a') | (1L << 'e') | (1L << 'i') | (1L << 'o') | (1L << 'u') |
+                  (1L << 'A') | (1L << 'E') | (1L << 'I') | (1L << 'O') | (1L << 'U');
 
-        for (char c : s.toCharArray()) {
-            if (Character.isLetter(c)) {
-                if ("aeiouAEIOU".indexOf(c) != -1) {
-                    vowels++;
-                } else {
-                    consonants++;
-                }
-            } else if (!Character.isDigit(c)) {
-                return false;
+        for (char ch : word.toCharArray()) {
+            if (!Character.isLetterOrDigit(ch)) return false;
+            if (Character.isAlphabetic(ch)) {
+                if ((vb & (1L << ch)) != 0)
+                    v++;
+                else
+                    c++;
             }
         }
-        return vowels >= 1 && consonants >= 1;
+
+        return v > 0 && c > 0;
     }
 }
