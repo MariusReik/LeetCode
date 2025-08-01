@@ -6,21 +6,21 @@ var generate = function(numRows) {
     if (numRows === 0) {
         return [];
     }
-
-    let result = [[1]];
-
-    for (let i = 1; i < numRows; i++) {
-        let prevRow = result[i - 1];
-        let newRow = new Array(i + 1);
-        newRow[0] = 1;
-        newRow[i] = 1;
-
-        for (let j = 1; j < i; j++) {
-            newRow[j] = prevRow[j - 1] + prevRow[j];
-        }
-
-        result.push(newRow);
+    if (numRows === 1) {
+        return [[1]];
     }
 
-    return result;
+    let preRows = generate(numRows - 1);
+    let lastRow = preRows[preRows.length - 1];
+    let newRow = new Array(numRows);
+
+    newRow[0] = 1;
+    newRow[numRows - 1] = 1;
+
+    for (let i = 1; i < numRows - 1; i++) {
+        newRow[i] = lastRow[i - 1] + lastRow[i];
+    }
+
+    preRows.push(newRow);
+    return preRows;
 };
